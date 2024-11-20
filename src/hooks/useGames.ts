@@ -8,12 +8,19 @@ export interface Platform {
     slug: string;
 }
 
+export interface Tag {
+    id: number;
+    name: string;
+    slug: string;
+}
+
 export interface Game {
     id: number;
     name: string;
     background_image: string;
     parent_platforms: { platform: Platform }[];
     metacritic: number;
+    tags: Tag[];
 }
 
 const useGames = (gameQuery: GameQuery) =>
@@ -24,6 +31,8 @@ const useGames = (gameQuery: GameQuery) =>
                 genres: gameQuery.genre?.id,
                 parent_platforms: gameQuery.platform?.id,
                 ordering: gameQuery.sortOrder,
+                exclude_additions: true,
+                search: gameQuery.searchText,
             },
         },
         [gameQuery]

@@ -30,11 +30,14 @@ const GameGrid = ({ gameQuery }: Props) => {
                         </GameCardContainer>
                     ))}
                 {!isLoading &&
-                    data.map((game) => (
-                        <GameCardContainer key={game.id}>
-                            <GameCard game={game} />
-                        </GameCardContainer>
-                    ))}
+                    data.map(
+                        (game) =>
+                            !game.tags.find((tag) => tag.slug === "nsfw") && (
+                                <GameCardContainer key={game.id}>
+                                    <GameCard game={game} />
+                                </GameCardContainer>
+                            )
+                    )}
             </SimpleGrid>
         </>
     );
